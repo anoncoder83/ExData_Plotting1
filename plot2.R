@@ -3,7 +3,7 @@ library(dplyr)
 library(lubridate)
 
 #load data and convert to decimal
-dt <- read.delim("household_power_consumption.txt" , header = TRUE, sep = ";")
+dt <- read.table("household_power_consumption.txt", header=T, sep=";", na.strings="?")
 feb1 = as.Date("1-2-2007", format="%d-%m-%Y")
 feb2 = as.Date("2-2-2007", format="%d-%m-%Y")
 tib <- dt  %>% mutate(date1 = dmy(Date)) %>%  filter(date1 == feb1 | date1 == feb2) %>% 

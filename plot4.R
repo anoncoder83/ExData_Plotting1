@@ -3,7 +3,7 @@ library(dplyr)
 library(lubridate)
 
 #load data and convert to decimal
-dt <- read.delim("household_power_consumption.txt" , header = TRUE, sep = ";")
+dt <- read.table("household_power_consumption.txt", header=T, sep=";", na.strings="?")
 feb1 = as.Date("1-2-2007", format="%d-%m-%Y")
 feb2 = as.Date("2-2-2007", format="%d-%m-%Y")
 tib <- dt  %>% mutate(date1 = dmy(Date)) %>%  filter(date1 == feb1 | date1 == feb2) %>% 
@@ -20,8 +20,8 @@ plot( tib3$Datetime,tib3$Voltage, type="l" , ylab = "Voltage", xlab="datetime")
 plot(tib3$Datetime, tib3$Sub_metering_1, main=" ",xlab="", ylab="Energy Sub metering", type="l", col="black" ,yaxp=c(0, 40, 4))
 lines(tib3$Datetime,tib3$Sub_metering_2, col="red")
 lines(tib3$Datetime,tib3$Sub_metering_3, col="blue")
-legend("topright", pch="-", col= c("black","red","blue"), box.lty="blank",inset = .01,
-       legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"))
+legend("topright", col= c("black","red","blue"), box.lty="blank",inset = .01,
+       legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"), lwd=1)
 plot( tib3$Datetime,tib3$Global_reactive_power, xlab="datetime",type="l" , ylab = "Global Reactive Power")
 dev.off()
 
